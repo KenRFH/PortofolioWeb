@@ -1,0 +1,57 @@
+{
+  "Nav": {
+    "Home": "Home",
+    "Projects": "Projects",
+    "About": "About",
+    "Contact": "Contact"
+  },
+  "hero": {
+    "tagline": "Portofolio 2026",
+    "greeting": "Hello, I'm",
+    "subtitle": "Information Systems",
+    "description": "A curious student interested in User Interface, Data Analysis, and Technology Implementation for Business.",
+    "viewProjects": "View Projects",
+    "downloadCv": "Download CV"
+  },
+
+  "about": {
+    "title": "About Me",
+    "paragraph1": "I am a creative developer focused on building interactive and functional digital experiences.",
+    "paragraph2": {
+      "prefix": "I specialize in",
+      "highlight": "React, TypeScript, and modern CSS",
+      "suffix": "to build scalable, clean, and maintainable interfaces."
+    },
+    "paragraph3": "When I'm not coding, I enjoy exploring the latest UI trends, contributing to open source, and brewing a great cup of coffee.",
+    "stats": {
+      "IPK": {
+        "value": "3.71",
+        "label": "Grade Point Average"
+      },
+      "projects": {
+        "value": "20+",
+        "label": "Projects Completed"
+      },
+      "satisfaction": {
+        "value": "1000+",
+        "label": "Cups of Coffee"
+      }
+    }
+  },
+
+  "tech": {
+    "title": "My Tech Stack",
+    "subtitle": "Technologies and Tools I Work With"
+  },
+  "projects": {
+    "title": "Featured Projects",
+    "subtitle": "Some of the projects I've worked on",
+      "viewProject": "Explore Project"
+  },
+
+  "contact": {
+    "title": "Get in Touch",
+    "description": "I'm open to new opportunities and collaborations. Feel free to reach out!",
+    "emailMe": "Email Me"
+  }
+}

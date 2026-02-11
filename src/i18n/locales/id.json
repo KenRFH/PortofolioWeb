@@ -1,0 +1,57 @@
+{
+  "Nav": {
+    "Home": "Beranda",
+    "Projects": "Projek",
+    "About": "Tentang",
+    "Contact": "Mulai Kenalan"
+  },
+
+  "hero": {
+    "tagline": "Portofolio 2026",
+    "greeting": "Hi, Nama Saya",
+    "subtitle": "Sistem Informasi",
+    "description": "Bocah yang tertarik dengan Antarmuka Pengguna, Data Anlisis, dan Implementasi Teknologi untuk Bisnis.",
+    "viewProjects": "Lihat Projek",
+    "downloadCv": "Unduh CV"
+  },
+  "about": {
+    "title": "Tentang Saya",
+   "paragraph1": "Saya adalah seorang mahasiswa yang tertarik pada pengembangan web dan bagaimana teknologi dapat mendukung dunia bisnis.",
+  "paragraph2": {
+    "prefix": "Saya memiliki pengalaman di bidang",
+    "highlight": "pengembangan web, manajemen proyek, dan kolaborasi tim",
+    "suffix": "dalam berbagai proyek yang pernah saya pimpin, dari konsep hingga implementasi."
+  },
+  "paragraph3": "Di luar kegiatan akademik dan coding, saya senang mengeksplorasi tren teknologi terbaru, berinteraksi dengan komunitas, dan mengembangkan ide-ide proyek yang memiliki nilai praktis bagi bisnis.",
+    "stats": {
+      "IPK": {
+        "value": "3.71",
+        "label": "Indek Prestasi Kumulatif"
+      },
+      "projects": {
+        "value": "7+",
+        "label": "Proyek Diselesaikan"
+      },
+      "satisfaction": {
+        "value": "1000+",
+        "label": "Beli Kopi"
+      }
+    }
+  },
+
+  "tech": {
+    "title": "Skill & Teknologi",
+    "subtitle": "Teknologi dan Alat yang Saya Gunakan"
+  },
+  "projects": {
+    "title": "Projek Terbaru",
+    "subtitle": "Beberapa projek yang telah saya kerjakan",
+    "viewProject": "Jelajahi Projek"
+  },
+
+  "contact": {
+    "title": "Mulai Kenalan",
+    "description": "Saya terbuka untuk peluang baru dan kolaborasi. Jangan ragu untuk menghubungi saya!",
+    "emailMe": "Kirim Email"
+  }
+}
