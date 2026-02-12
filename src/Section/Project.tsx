@@ -5,7 +5,7 @@ import Selecta from "../assets/Projects/Selecta.png";
 import Selecta360 from "../assets/Projects/Selecta360.png";
 import WellMaggot from "../assets/Projects/WellMaggot.png";
 import SelectaHotel from "../assets/Projects/SelectaHotel.png";
-import porto from "../assets/Projects/porto.png";
+import porto from "../assets/Projects/Porto.png";
 
 interface ProjectItem {
   image: string;
