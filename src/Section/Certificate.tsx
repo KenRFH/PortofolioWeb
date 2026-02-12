@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useTranslation } from "react-i18next";
 import udemy from "../assets/certificates/udemy.png";
 import magang from "../assets/certificates/magang.png";
