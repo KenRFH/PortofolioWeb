@@ -5,6 +5,7 @@ import Selecta from "../assets/Projects/Selecta.png";
 import Selecta360 from "../assets/Projects/Selecta360.png";
 import WellMaggot from "../assets/Projects/WellMaggot.png";
 import SelectaHotel from "../assets/Projects/SelectaHotel.png";
+import porto from "../assets/Projects/porto.png";
 
 interface ProjectItem {
   image: string;
@@ -43,6 +44,12 @@ const Project: React.FC = () => {
       title: "Selecta Hotel",
       description: "Web Developer",
       link: "https://github.com/selectaDeveloper/Hotel",
+    },
+    {
+      image: porto,
+      title: "Portofolio Ken",
+      description: "Web Developer",
+      link: "https://github.com/KenRFH/PortofolioWeb",
     },
   ];
 

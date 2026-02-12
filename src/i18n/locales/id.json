@@ -29,7 +29,7 @@
         "label": "Indek Prestasi Kumulatif"
       },
       "projects": {
-        "value": "7+",
+        "value": "4+",
         "label": "Proyek Diselesaikan"
       },
       "satisfaction": {
@@ -53,5 +53,10 @@
     "title": "Mulai Kenalan",
     "description": "Mulai berkenalan dengan saya, saya terbuka untuk peluang kolaborasi, diskusi teknologi, atau sekadar berbagi ide.",
     "emailMe": "Kirim Email"
+  },
+
+  "certificates": {
+    "title": "Sertifikat & Course",
+    "description": "Sertifikat profesional dan pelatihan yang mendukung keahlian teknis saya."
   }
 }

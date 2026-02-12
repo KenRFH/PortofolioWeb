@@ -29,7 +29,7 @@
         "label": "Grade Point Average"
       },
       "projects": {
-        "value": "20+",
+        "value": "4+",
         "label": "Projects Completed"
       },
       "satisfaction": {
@@ -53,5 +53,10 @@
     "title": "Get in Touch",
     "description": "I'm open to new opportunities and collaborations. Feel free to reach out!",
     "emailMe": "Email Me"
+  },
+
+  "certificates": {
+    "title": "Certificates & Courses",
+    "description": "Professional certifications and training that support my technical expertise."
   }
 }
