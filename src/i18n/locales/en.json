@@ -1,8 +1,10 @@
 {
   "Nav": {
     "Home": "Home",
-    "Projects": "Projects",
     "About": "About",
+    "Experience": "Experience",
+    "Certificates": "Certificates",
+    "Projects": "Projects",
     "Contact": "Contact"
   },
   "hero": {
@@ -58,5 +60,9 @@
   "certificates": {
     "title": "Certificates & Courses",
     "description": "Professional certifications and training that support my technical expertise."
+  },
+  "experience": {
+    "title": "Work Experience",
+    "description": "My professional path, internships, and tech contributions."
   }
 }

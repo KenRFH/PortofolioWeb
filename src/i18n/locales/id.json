@@ -1,8 +1,10 @@
 {
   "Nav": {
     "Home": "Beranda",
-    "Projects": "Projek",
     "About": "Tentang",
+    "Experience": "Pengalaman",
+    "Certificates": "Sertifikat",
+    "Projects": "Projek",
     "Contact": "Mulai Kenalan"
   },
 
@@ -29,7 +31,7 @@
         "label": "Indek Prestasi Kumulatif"
       },
       "projects": {
-        "value": "4+",
+        "value": "6+",
         "label": "Proyek Diselesaikan"
       },
       "satisfaction": {
@@ -58,5 +60,9 @@
   "certificates": {
     "title": "Sertifikat & Course",
     "description": "Sertifikat profesional dan pelatihan yang mendukung keahlian teknis saya."
+  },
+  "experience": {
+    "title": "Pengalaman",
+    "description": "Riwayat karir, magang, dan kontribusi saya di dunia teknologi."
   }
 }

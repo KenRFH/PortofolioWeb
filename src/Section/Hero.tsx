@@ -1,9 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ArrowRight, Download } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { supabase } from "../supabaseClient";
 
 const Hero: React.FC = () => {
   const { t } = useTranslation();
+  const [cvUrl, setCvUrl] = useState("https://drive.google.com/file/d/1lP10W7JCRRpquus8xy6i6GSKKAsDNGAR/view?usp=sharing");
+
+  useEffect(() => {
+    const fetchCv = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("settings")
+          .select("value")
+          .eq("key", "cv_url")
+          .single();
+
+        if (error) throw error;
+        if (data && data.value) {
+          setCvUrl(data.value);
+        }
+      } catch (err) {
+        console.warn("Using fallback CV link:", err);
+      }
+    };
+
+    fetchCv();
+  }, []);
 
   return (
     <section
@@ -45,7 +68,9 @@ const Hero: React.FC = () => {
 
             {/* Outline Button */}
             <a
-              href="https://drive.google.com/file/d/1lP10W7JCRRpquus8xy6i6GSKKAsDNGAR/view?usp=sharing"
+              href={cvUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg border border-zinc-300 px-6 py-3
                          text-zinc-700 font-medium transition-all duration-300
                          hover:border-black hover:text-black hover:bg-zinc-50">

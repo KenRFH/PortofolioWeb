@@ -1,14 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
-import Selecta from "../assets/Projects/Selecta.png";
-import Selecta360 from "../assets/Projects/Selecta360.png";
-import WellMaggot from "../assets/Projects/WellMaggot.png";
-import SelectaHotel from "../assets/Projects/SelectaHotel.png";
-import porto from "../assets/Projects/Porto.png";
+import { supabase } from "../supabaseClient";
 
 interface ProjectItem {
-  image: string;
+  image?: string;
+  image_url?: string;
   title: string;
   description: string;
   link: string;
@@ -20,38 +17,29 @@ const Project: React.FC = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const projects: ProjectItem[] = [
-    {
-      image: Selecta,
-      title: "Selecta Wisata",
-      description: "QA & FE Support",
-      link: "https://github.com/najuwamr/wisata-batu",
-    },
-    {
-      image: WellMaggot,
-      title: "WellMaggot",
-      description: "Project Manager & FE Support",
-      link: "https://github.com/najuwamr/WellMaggot",
-    },
-    {
-      image: Selecta360,
-      title: "Selecta 360",
-      description: "Web Developer",
-      link: "https://github.com/selectaDeveloper/Sprint2-360",
-    },
-    {
-      image: SelectaHotel,
-      title: "Selecta Hotel",
-      description: "Web Developer",
-      link: "https://github.com/selectaDeveloper/Hotel",
-    },
-    {
-      image: porto,
-      title: "Portofolio Ken",
-      description: "Web Developer",
-      link: "https://github.com/KenRFH/PortofolioWeb",
-    },
-  ];
+  const [projects, setProjects] = useState<ProjectItem[]>([]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("projects")
+          .select("*")
+          .order("created_at", { ascending: false });
+
+        if (error) throw error;
+
+        if (data && data.length > 0) {
+          setProjects(data);
+        }
+      } catch (err) {
+        console.warn("Error fetching projects:", err);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
 
   const nextSlide = () => {
     if (isAnimating) return;
@@ -94,6 +82,19 @@ const Project: React.FC = () => {
     }
   };
 
+  if (projects.length === 0) {
+    return (
+      <section id="projects" className="min-h-[50vh] bg-neutral-950 text-white py-24 px-6 flex flex-col items-center justify-center">
+        <h1 className="text-4xl md:text-5xl font-semibold mb-12 text-center">
+          {t("projects.title")}
+        </h1>
+        <div className="text-gray-500 py-16 text-center border border-white/10 rounded-2xl w-full max-w-2xl bg-neutral-900/40">
+          Belum ada projek. Kelola projek Anda melalui Admin Panel.
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       id="projects"
@@ -127,13 +128,19 @@ const Project: React.FC = () => {
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
             {projects.map((project, index) => (
               <div key={index} className="w-full h-full flex-shrink-0 px-4">
-                <div className="w-full h-full bg-neutral-900 border border-white/10 rounded-2xl overflow-hidden flex flex-col">
-                  {/* Image */}
-                  <div className="min-h-[300px] w-full overflow-hidden">
+                <div className="w-full h-full bg-neutral-900 border border-white/10 rounded-2xl overflow-hidden flex flex-col group/card">
+                  {/* Image with Mock Browser Header */}
+                  <div className="relative w-full aspect-[16/10] overflow-hidden bg-neutral-950 border-b border-white/5">
+                    {/* Mock Browser Dots */}
+                    <div className="absolute top-3 left-4 flex gap-1.5 z-10">
+                      <span className="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+                    </div>
                     <img
-                      src={project.image}
+                      src={project.image_url || project.image}
                       alt={project.title}
-                      className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
+                      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/card:scale-105"
                     />
                   </div>
 

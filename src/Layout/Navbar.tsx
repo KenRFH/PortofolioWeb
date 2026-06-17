@@ -28,6 +28,8 @@ type MobileSocialItem = {
 const navLinks: NavLink[] = [
   { key: "Nav.Home", href: "#home" },
   { key: "Nav.About", href: "#about" },
+  { key: "Nav.Experience", href: "#experience" },
+  { key: "Nav.Certificates", href: "#certificate" },
   { key: "Nav.Projects", href: "#projects" },
   { key: "Nav.Contact", href: "#contact" },
 ];
@@ -41,7 +43,7 @@ const socialLinks: SocialLink[] = [
   },
   {
     icon: Linkedin,
-    href: "https://linkedin.com/in/kenriezqy",
+    href: "https://linkedin.com/in/riezqyken",
     label: "LinkedIn",
   },
 ];
