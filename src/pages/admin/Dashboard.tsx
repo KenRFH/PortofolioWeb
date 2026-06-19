@@ -938,14 +938,14 @@ const Dashboard: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Deskripsi Tanggung Jawab / Keterangan</label>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Deskripsi Tanggung Jawab / Keterangan (Poin-poin, pisahkan dengan baris baru)</label>
                     <textarea
                       required
                       rows={4}
                       value={expForm.description}
                       onChange={(e) => setExpForm({ ...expForm, description: e.target.value })}
                       className="w-full bg-neutral-950 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all duration-300"
-                      placeholder="Tuliskan detail pekerjaan atau pencapaian Anda..."
+                      placeholder="Contoh:&#10;- Memimpin tim pengembangan frontend beranggotakan 4 orang&#10;- Merancang arsitektur sistem berbasis cloud&#10;- Mengurangi load time aplikasi sebesar 40%"
                     />
                   </div>
                 </>

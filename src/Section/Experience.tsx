@@ -111,9 +111,35 @@ const Experience: React.FC = () => {
                     </div>
                   </div>
 
-                  <p className="text-sm md:text-base text-gray-400 leading-relaxed font-body">
-                    {exp.description}
-                  </p>
+                  {(() => {
+                    const desc = exp.description || "";
+                    const points = desc
+                      .split("\n")
+                      .map((p) => p.trim())
+                      .filter(Boolean);
+
+                    if (points.length > 1 || desc.includes("\n") || desc.trim().startsWith("-") || desc.trim().startsWith("•") || desc.trim().startsWith("*")) {
+                      return (
+                        <ul className="space-y-2 text-sm md:text-base text-gray-400 font-body">
+                          {points.map((point, idx) => {
+                            const cleanedPoint = point.replace(/^[-\*•]\s*/, "");
+                            return (
+                              <li key={idx} className="flex items-start gap-2">
+                                <span className="text-purple-400 mt-2 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-purple-400" />
+                                <span>{cleanedPoint}</span>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      );
+                    } else {
+                      return (
+                        <p className="text-sm md:text-base text-gray-400 leading-relaxed font-body">
+                          {desc}
+                        </p>
+                      );
+                    }
+                  })()}
                 </div>
               </div>
             ))}
