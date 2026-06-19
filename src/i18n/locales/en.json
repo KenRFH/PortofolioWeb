@@ -18,13 +18,13 @@
 
   "about": {
     "title": "About Me",
-    "paragraph1": "I am a creative developer focused on building interactive and functional digital experiences.",
+    "paragraph1": "I am a developer and problem solver passionate about bridging technology with real-world requirements.",
     "paragraph2": {
-      "prefix": "I specialize in",
-      "highlight": "React, TypeScript, and modern CSS",
-      "suffix": "to build scalable, clean, and maintainable interfaces."
+      "prefix": "I love to",
+      "highlight": "formulate business and general problems into technology solutions",
+      "suffix": "that create a meaningful, positive, and direct impact for users."
     },
-    "paragraph3": "When I'm not coding, I enjoy exploring the latest UI trends, contributing to open source, and brewing a great cup of coffee.",
+    "paragraph3": "Through a user-centric approach and technical efficiency, I am committed to driving projects from initial concepts to successful, highly practical implementations.",
     "stats": {
       "IPK": {
         "value": "3.71",

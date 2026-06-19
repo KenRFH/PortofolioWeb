@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { supabase } from "../supabaseClient";
@@ -15,7 +15,7 @@ const Project: React.FC = () => {
   const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
 
   const [projects, setProjects] = useState<ProjectItem[]>([]);
 
@@ -40,23 +40,22 @@ const Project: React.FC = () => {
     fetchProjects();
   }, []);
 
-
   const nextSlide = () => {
-    if (isAnimating) return;
+    if (isAnimating || projects.length <= 1) return;
     setIsAnimating(true);
     setCurrentIndex((prev) => (prev + 1) % projects.length);
     setTimeout(() => setIsAnimating(false), 500);
   };
 
   const prevSlide = () => {
-    if (isAnimating) return;
+    if (isAnimating || projects.length <= 1) return;
     setIsAnimating(true);
     setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
     setTimeout(() => setIsAnimating(false), 500);
   };
 
   const goToSlide = (index: number) => {
-    if (isAnimating || index === currentIndex) return;
+    if (isAnimating || index === currentIndex || projects.length <= 1) return;
     setIsAnimating(true);
     setCurrentIndex(index);
     setTimeout(() => setIsAnimating(false), 500);
@@ -64,23 +63,14 @@ const Project: React.FC = () => {
 
   // Stable Auto Slide
   useEffect(() => {
-    startAutoSlide();
-    return stopAutoSlide;
-  }, []);
+    if (projects.length <= 1 || isPaused) return;
 
-  const startAutoSlide = () => {
-    stopAutoSlide();
-    intervalRef.current = setInterval(() => {
+    const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % projects.length);
     }, 5000);
-  };
 
-  const stopAutoSlide = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
-  };
+    return () => clearInterval(interval);
+  }, [projects.length, isPaused]);
 
   if (projects.length === 0) {
     return (
@@ -99,13 +89,13 @@ const Project: React.FC = () => {
     <section
       id="projects"
       className="min-h-screen bg-neutral-950 text-white py-24 px-6 flex flex-col items-center"
-      onMouseEnter={stopAutoSlide}
-      onMouseLeave={startAutoSlide}>
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}>
       <h1 className="text-4xl md:text-5xl font-semibold mb-20 text-center">
         {t("projects.title")}
       </h1>
 
-      <div className="relative w-full max-w-6xl h-[520px]">
+      <div className="relative w-full max-w-6xl h-[620px] md:h-[520px]">
         {/* Navigation */}
         <button
           onClick={prevSlide}
@@ -128,9 +118,9 @@ const Project: React.FC = () => {
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
             {projects.map((project, index) => (
               <div key={index} className="w-full h-full flex-shrink-0 px-4">
-                <div className="w-full h-full bg-neutral-900 border border-white/10 rounded-2xl overflow-hidden flex flex-col group/card">
+                <div className="w-full h-full bg-neutral-900 border border-white/10 rounded-2xl overflow-hidden flex flex-col md:flex-row group/card">
                   {/* Image with Mock Browser Header */}
-                  <div className="relative w-full aspect-[16/10] overflow-hidden bg-neutral-950 border-b border-white/5">
+                  <div className="relative w-full md:w-3/5 h-48 md:h-full overflow-hidden bg-neutral-950 border-b md:border-b-0 md:border-r border-white/5">
                     {/* Mock Browser Dots */}
                     <div className="absolute top-3 left-4 flex gap-1.5 z-10">
                       <span className="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
@@ -145,22 +135,56 @@ const Project: React.FC = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="flex flex-col justify-between flex-1 p-8 ">
+                  <div className="flex flex-col justify-between w-full md:w-2/5 p-6 md:p-8 overflow-y-auto">
                     <div>
-                      <h3 className="text-2xl md:text-3xl font-semibold mb-3">
+                      <h3 className="text-2xl md:text-3xl font-semibold mb-4 text-white">
                         {project.title}
                       </h3>
 
-                      <p className="text-gray-400 inline-block bg-white/5 border border-white/10 px-4 py-2 rounded-lg text-sm">
-                        {project.description}
-                      </p>
+                      {(() => {
+                        const desc = project.description || "";
+                        const newlineIndex = desc.indexOf("\n");
+                        if (newlineIndex !== -1) {
+                          const role = desc.substring(0, newlineIndex);
+                          const detailsText = desc.substring(newlineIndex + 1);
+                          const points = detailsText
+                            .split("\n")
+                            .map((p) => p.trim())
+                            .filter(Boolean);
+
+                          return (
+                            <div className="space-y-4">
+                              <span className="inline-block bg-purple-500/10 border border-purple-500/20 px-3 py-1 rounded-lg text-xs font-semibold text-purple-300 tracking-wide">
+                                {role}
+                              </span>
+                              <ul className="space-y-2 text-sm text-gray-400">
+                                {points.map((point, idx) => {
+                                  const cleanedPoint = point.replace(/^[-\*•]\s*/, "");
+                                  return (
+                                    <li key={idx} className="flex items-start gap-2">
+                                      <span className="text-purple-400 mt-2 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-purple-400" />
+                                      <span className="leading-relaxed">{cleanedPoint}</span>
+                                    </li>
+                                  );
+                                })}
+                              </ul>
+                            </div>
+                          );
+                        } else {
+                          return (
+                            <span className="inline-block bg-purple-500/10 border border-purple-500/20 px-3 py-1 rounded-lg text-xs font-semibold text-purple-300 tracking-wide">
+                              {desc}
+                            </span>
+                          );
+                        }
+                      })()}
                     </div>
 
                     <a
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative inline-flex items-center gap-2 mt-6 px-4 py-2 text-sm font-medium text-white transition-all duration-300">
+                      className="group relative inline-flex items-center gap-2 mt-6 text-sm font-medium text-white transition-all duration-300 self-start">
                       <span className="relative">
                         {t("projects.viewProject")}
                         <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-white transition-all duration-500 group-hover:w-full group-hover:bg-white"></span>

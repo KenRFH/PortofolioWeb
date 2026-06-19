@@ -18,13 +18,13 @@
   },
   "about": {
     "title": "Tentang Saya",
-   "paragraph1": "Saya adalah seorang mahasiswa yang tertarik pada pengembangan web dan bagaimana teknologi dapat mendukung dunia bisnis.",
-  "paragraph2": {
-    "prefix": "Saya memiliki pengalaman di bidang",
-    "highlight": "pengembangan web, manajemen proyek, dan kolaborasi tim",
-    "suffix": "dalam berbagai proyek yang pernah saya pimpin, dari konsep hingga implementasi."
-  },
-  "paragraph3": "Di luar kegiatan akademik dan coding, saya senang mengeksplorasi tren teknologi terbaru, berinteraksi dengan komunitas, dan mengembangkan ide-ide proyek yang memiliki nilai praktis bagi bisnis.",
+    "paragraph1": "Saya adalah seorang developer dan pemecah masalah yang antusias dalam menjembatani teknologi dengan kebutuhan nyata.",
+    "paragraph2": {
+      "prefix": "Saya sangat senang",
+      "highlight": "merumuskan masalah bisnis dan umum dengan solusi teknologi",
+      "suffix": "sehingga mampu menghasilkan produk digital yang berdampak langsung dan bermanfaat bagi masyarakat luas."
+    },
+    "paragraph3": "Melalui pendekatan yang berpusat pada pengguna dan efisiensi teknis, saya berkomitmen untuk mengembangkan proyek-proyek dari konsep awal hingga implementasi yang sukses dan bernilai praktis.",
     "stats": {
       "IPK": {
         "value": "3.71",

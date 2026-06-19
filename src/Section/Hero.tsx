@@ -37,9 +37,6 @@ const Hero: React.FC = () => {
 
       <div className="mx-auto max-w-5xl px-4 md:px-8 w-full">
         <div className="max-w-4xl">
-          <span className="text-blue-600 font-medium tracking-wider uppercase text-sm">
-            {t("hero.tagline")}
-          </span>
 
           <h1 className="mt-6 text-5xl md:text-7xl font-bold tracking-tight leading-tight text-black font-display">
             {t("hero.greeting")}{" "}

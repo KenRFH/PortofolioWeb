@@ -68,6 +68,8 @@ const Dashboard: React.FC = () => {
 
   // Form Fields
   const [projForm, setProjForm] = useState({ title: "", description: "", link: "", image_url: "" });
+  const [projRole, setProjRole] = useState("");
+  const [projDetails, setProjDetails] = useState("");
   const [certForm, setCertForm] = useState({ title: "", issuer: "", year: "", link: "", image_url: "" });
   const [expForm, setExpForm] = useState({ title: "", company: "", period: "", description: "" });
 
@@ -253,6 +255,8 @@ const Dashboard: React.FC = () => {
   const openCreateModal = () => {
     setModalType("create");
     setEditingId(null);
+    setProjRole("");
+    setProjDetails("");
     setProjForm({ title: "", description: "", link: "", image_url: "" });
     setCertForm({ title: "", issuer: "", year: "", link: "", image_url: "" });
     setExpForm({ title: "", company: "", period: "", description: "" });
@@ -264,6 +268,16 @@ const Dashboard: React.FC = () => {
     setModalType("edit");
     setEditingId(item.id);
     if (activeTab === "projects") {
+      const desc = item.description || "";
+      const newlineIndex = desc.indexOf("\n");
+      let roleVal = desc;
+      let detailsVal = "";
+      if (newlineIndex !== -1) {
+        roleVal = desc.substring(0, newlineIndex);
+        detailsVal = desc.substring(newlineIndex + 1);
+      }
+      setProjRole(roleVal);
+      setProjDetails(detailsVal);
       setProjForm({
         title: item.title,
         description: item.description,
@@ -296,12 +310,19 @@ const Dashboard: React.FC = () => {
 
     try {
       if (activeTab === "projects") {
+        const finalDescription = projDetails.trim()
+          ? `${projRole.trim()}\n${projDetails.trim()}`
+          : projRole.trim();
+        const submissionForm = {
+          ...projForm,
+          description: finalDescription,
+        };
         if (modalType === "create") {
-          const { error } = await supabase.from("projects").insert([projForm]);
+          const { error } = await supabase.from("projects").insert([submissionForm]);
           if (error) throw error;
           showToast("Projek berhasil ditambahkan!");
         } else {
-          const { error } = await supabase.from("projects").update(projForm).eq("id", editingId);
+          const { error } = await supabase.from("projects").update(submissionForm).eq("id", editingId);
           if (error) throw error;
           showToast("Projek berhasil diperbarui!");
         }
@@ -712,10 +733,21 @@ const Dashboard: React.FC = () => {
                     <input
                       type="text"
                       required
-                      value={projForm.description}
-                      onChange={(e) => setProjForm({ ...projForm, description: e.target.value })}
+                      value={projRole}
+                      onChange={(e) => setProjRole(e.target.value)}
                       className="w-full bg-neutral-950 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all duration-300"
                       placeholder="Contoh: Project Manager & FE Support"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Detail Deskripsi (Poin-poin, pisahkan dengan baris baru)</label>
+                    <textarea
+                      rows={4}
+                      value={projDetails}
+                      onChange={(e) => setProjDetails(e.target.value)}
+                      className="w-full bg-neutral-950 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all duration-300"
+                      placeholder="Contoh:&#10;- Mengembangkan frontend menggunakan React & TailwindCSS&#10;- Mengintegrasikan Supabase sebagai database&#10;- Melakukan deployment ke Vercel"
                     />
                   </div>
 

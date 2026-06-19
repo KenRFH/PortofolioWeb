@@ -16,22 +16,6 @@ const Experience: React.FC = () => {
   const [experiences, setExperiences] = useState<ExperienceItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Fallback data if Supabase is empty or credentials are missing
-  const fallbackExperiences: ExperienceItem[] = [
-    {
-      title: "Fullstack Web Developer",
-      company: "Welltrash",
-      period: "2025 - Sekarang",
-      description: "Membangun dan memelihara aplikasi web pengolahan sampah organik dengan React, Laravel, dan Tailwind CSS. Mengoptimalkan performa basis data dan mendesain antarmuka pengguna yang responsif.",
-    },
-    {
-      title: "Web Developer Intern",
-      company: "Selecta Wisata",
-      period: "2024 - 2025",
-      description: "Berkontribusi pada tim QA & Front End untuk meningkatkan keandalan antarmuka website. Terlibat dalam implementasi modul 360-degree tour dan fitur pemesanan tiket.",
-    },
-  ];
-
   useEffect(() => {
     const fetchExperiences = async () => {
       try {
@@ -45,11 +29,11 @@ const Experience: React.FC = () => {
         if (data && data.length > 0) {
           setExperiences(data);
         } else {
-          setExperiences(fallbackExperiences);
+          setExperiences([]);
         }
       } catch (err) {
-        console.warn("Using fallback experiences:", err);
-        setExperiences(fallbackExperiences);
+        console.warn("Error fetching experiences:", err);
+        setExperiences([]);
       } finally {
         setLoading(false);
       }
@@ -57,6 +41,25 @@ const Experience: React.FC = () => {
 
     fetchExperiences();
   }, []);
+
+  if (!loading && experiences.length === 0) {
+    return (
+      <section id="experience" className="py-24 bg-neutral-950 text-white relative overflow-hidden flex flex-col items-center justify-center min-h-[40vh] ">
+        {/* Decorative background glow */}
+        <div className="absolute top-1/2 left-0 w-80 h-80 bg-purple-900/10 rounded-full blur-[120px] pointer-events-none -translate-y-1/2"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-900/10 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <div className="max-w-6xl mx-auto px-6 relative z-10 text-center w-full">
+          <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight mb-8">
+            {t("experience.title", "Pengalaman")}
+          </h2>
+          <div className="text-gray-500 py-16 text-center border border-white/10 rounded-2xl w-full max-w-2xl mx-auto bg-neutral-900/40">
+            Belum ada riwayat pengalaman. Kelola pengalaman Anda melalui Admin Panel.
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="experience" className="py-24 bg-neutral-950 text-white relative overflow-hidden">

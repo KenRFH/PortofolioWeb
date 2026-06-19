@@ -35,9 +35,6 @@ const TechGrid: React.FC = () => {
           flex gap-8 whitespace-nowrap
           animate-marquee
           will-change-transform
-          [animation-duration:12s]
-          md:[animation-duration:20s]
-          lg:[animation-duration:25s]
           hover:[animation-play-state:paused]
         ">
         {[...techStack, ...techStack].map((tech, index) => (
@@ -67,9 +64,6 @@ const TechGrid: React.FC = () => {
           flex gap-8 whitespace-nowrap
           animate-marquee-reverse
           will-change-transform
-          [animation-duration:12s]
-          md:[animation-duration:20s]
-          lg:[animation-duration:25s]
           hover:[animation-play-state:paused]
         ">
         {[...techStack, ...techStack].reverse().map((tech, index) => (
